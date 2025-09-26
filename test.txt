@@ -1,0 +1,59 @@
+Seed DB:	python seed.py
+
+Start server:	uvicorn main:app --reload --port 8000
+
+Create an alert (Admin):
+POST /admin/alerts
+{
+  "title": "Urgent: Incident",
+  "message": "Service degraded",
+  "severity": "critical",
+  "delivery": "inapp",
+  "audiences": [{"type":"org"}]
+}
+
+Simulate reminders:	POST /admin/alerts/trigger-reminders
+
+User fetch alerts:	GET /user/1/alerts
+
+User snooze:	
+POST /user/snooze
+{ "user_id": 1, "alert_id": 2 }
+
+Analytics:	GET /analytics
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Next steps / Improvements (suggested)
+
+Add background scheduler (Celery/APScheduler) to run reminders every 2 hours automatically.
+
+Add Email/SMS delivery strategies.
+
+Add role-based auth for Admin endpoints.
+
+Add pagination, filtering and search on admin listing.
+
+Add tests for reminder & snooze logic.
